@@ -1,0 +1,36 @@
+<svg id="graph-svg" width="620" height="620" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <rect width="620" height="620" fill="white"/>
+    <polygon class="paint" points="340 310, 310 250, 310 310" fill="gray"/>
+    <rect class="paint" x="310" y="310" width="60" height="60" fill="gray"/>
+    <path class="paint" d="M310,310 L280,310   A25,25 1 0,0    310,340  z" fill="gray"/>
+    <polygon class="graph-base" points="390 310, 385 313, 385 307" stroke="white" stroke-width="1"/>
+    <polygon class="graph-base" points="310 230, 307 235, 313 235" stroke="white" stroke-width="1"/>
+    <line class="graph-base" stroke="black" x1="310" x2="310" y1="235" y2="385" stroke-width="3"/>
+    <line class="graph-base" stroke="black" x1="235" x2="385" y1="310" y2="310" stroke-width="3"/>
+
+    <line  class="graph-base" stroke="white" stroke-width="2" x1="307" x2="313" y1="250"
+           y2="250"/>
+    <line class="graph-base" stroke="white" stroke-width="2" x1="307" x2="313" y1="280"
+          y2="280"/>
+    <line class="graph-base" stroke="white" stroke-width="2" x1="307" x2="313" y1="340"
+          y2="340"/>
+    <line class="graph-base" stroke="white" stroke-width="2" x1="307" x2="313" y1="370"
+          y2="370"/>
+    <line class="graph-base" stroke="white" stroke-width="2" x1="370" x2="370" y1="307" y2="313"/>
+    <line class="graph-base" stroke="white" stroke-width="2" x1="340" x2="340" y1="307"
+          y2="313"/>
+    <line class="graph-base" stroke="white" stroke-width="2" x1="280" x2="280" y1="307"
+          y2="313"/>
+    <line class="graph-base" stroke="white" stroke-width="2" x1="250" x2="250" y1="307"
+          y2="313"/>
+    <text class="graph-base" fill="black" x="385" y="325">X</text>
+    <text class="graph-base" fill="black" x="295" y="235">Y</text>
+    <text class="graph-base" fill="black" x="295" y="255">R</text>
+    <text class="graph-base" fill="black" x="285" y="285">R/2</text>
+    <text class="graph-base" fill="black" x="280" y="345">-R/2</text>
+    <text class="graph-base" fill="black" x="290" y="375">-R</text>
+    <text class="graph-base" fill="black" x="365" y="325">R</text>
+    <text  class="graph-base" fill="black" x="330" y="325">R/2</text>
+    <text  class="graph-base" fill="black" x="270" y="325">-R/2</text>
+    <text class="graph-base" fill="black" x="245" y="325">-R</text>
+</svg>

@@ -1,0 +1,108 @@
+#header {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 10px;
+    /*min-width: 920px;*/
+    text-align: center;
+    font-family: sans-serif;
+}
+#header h1 {
+    color: #0a2534
+}
+#content {
+    width: 98%;
+    /*min-width: 920px;*/
+    margin-bottom: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#date {
+    margin-top: 5px;
+    display: block;
+}
+
+
+#footer {
+    margin-top: 20px;
+}
+
+
+#content, #header, #footer{
+    background-color: #FFEBCD;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    min-width: 1000px;
+}
+body {
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.button {
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button {
+    border: 1px solid #fff;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #444;
+    background-color: #b2dc9f;
+    box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    transition: box-shadow 0.2s;
+}
+.button:focus-visible {
+    border: 1px solid #4c51f9;
+    outline: none;
+}
+.button:hover {
+    transition: all 0.2s;
+    box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+}
+.button:active {
+    background-color: #808080;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+table th {
+    font-weight: bold;
+    padding: 5px;
+    background: #efefef;
+    border: 1px solid #dddddd;
+}
+table td{
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    text-align: left;
+}
+
+div.form {
+    margin-right: 5px;
+}
+
+#graph {
+    margin-left: 5px;
+}
+
+
+
+
+

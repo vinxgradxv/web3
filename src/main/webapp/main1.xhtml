@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="resources/css/start_page.css"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+    <h:body>
+        <ui:composition template="templates/main_template.xhtml">
+
+            <ui:define name="button">
+                <h:button class="button" outcome="toHome" value="Перейти на стартовую"/>
+                <div class="table">
+                    <h:panelGroup id="pointsTable">
+                        <h:dataTable styleClass="table" value="#{resultsBean.resultList}" var="point">
+                            <h:column>
+                                <f:facet name="header">Init time</f:facet>
+                                <h:outputText value="#{point.initTime}">
+                                    <f:converter converterId="initTimeConverter"/>
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Working time (ms)</f:facet>
+                                    <h:outputText value="#{point.workTime * 0.000001}">
+                                        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                    </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">X</f:facet>
+                                <h:outputText value="#{point.x}">
+                                    <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Y</f:facet>
+                                <h:outputText value="#{point.y}">
+                                    <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                                </h:outputText>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">R</f:facet>
+                                #{point.r}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Result</f:facet>
+                                <h:outputText value=" #{resultsBean.isHit(point)}">
+                                    <f:converter converterId="resultConverter"/>
+                                </h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="form">
+                    <h:form id="newPointForm">
+                        <label>Значение X:</label><br/>
+                        <h:selectOneMenu id="X" value="#{resultsBean.result.x}">
+                            <f:selectItem itemValue="-5" itemLabel="-5"/>
+                            <f:selectItem itemValue="-4" itemLabel="-4"/>
+                            <f:selectItem itemValue="-3" itemLabel="-3"/>
+                            <f:selectItem itemValue="-2" itemLabel="-2"/>
+                            <f:selectItem itemValue="-1" itemLabel="-1"/>
+                            <f:selectItem itemValue="0" itemLabel="0"/>
+                            <f:selectItem itemValue="1" itemLabel="1"/>
+                            <f:selectItem itemValue="2" itemLabel="2"/>
+                            <f:selectItem itemValue="3" itemLabel="3"/>
+                            <f:validateRequired/>
+                        </h:selectOneMenu>
+                        <br></br><label>Значение Y:</label><br/>
+                        <h:inputText  value="#{resultsBean.result.y}" type="text" id="y_input" pt:placeholder="(-3 ... 3)" maxlength="16">
+                            <f:validator validatorId="yValidator"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="y_message" for="y_input"/>
+                        <br/><br/>
+
+                        <label>Значение R:</label><br/>
+                        <h:outputText id="output" value="1" class="r_value"/>
+                        <h:inputHidden id="txt2" value="#{resultsBean.result.r}"/>
+                        <p:slider for="txt2" display="output" minValue="1" step="0.25" maxValue="4" displayTemplate="{value}" onSlideEnd="change_scale()"/>
+                        <div class="checkButton">
+                            <h:commandButton id="checkButton" value="Проверить" onclick=""
+                                             action="#{resultsBean.addResult()}"
+                                             styleClass="button">
+                                <f:ajax event="click" execute="newPointForm"
+                                        render="pointsTable y_message remove_points ugly_function"/>
+                            </h:commandButton>
+
+                        </div>
+
+                    </h:form>
+
+                    <div class="clearButton">
+                        <h:commandButton styleClass="button" id="reset"
+                                         value="Очистить"
+                                         action="#{resultsBean.clearResultList()}">
+                            <f:ajax execute="" render="pointsTable remove_points"/>
+                        </h:commandButton>
+                    </div>
+
+                    <h:form id="pointFromGraphic">
+                        <h:inputHidden id="hiddenXForGraphic" value="#{resultsBean.result.x}"/>
+
+                        <h:inputHidden id="hiddenRForGraphic" value="#{resultsBean.result.r}"/>
+
+                        <h:inputHidden id="hiddenYForGraphic" value="#{resultsBean.result.y}"/>
+
+                        <h:commandLink action="#{resultsBean.addResult()}" id="send"/>
+                    </h:form>
+
+                </div>
+                <div id="graph">
+                    <svg id="var11357" width="620" height="620" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="620" height="620" fill="white"/>
+                        <polygon id="top_right" class="paint" points="340 310, 310 250, 310 310" fill="gray"/>
+                        <rect id="bottom_right" x="310" y="310" width="60" height="60" fill="gray"/>
+                        <path id="bottom_left" d="M310,310 L280,310   A25,25 1 0,0    310,340  z" fill="gray"/>
+                        <polygon id="x_arrow" points="390 310, 385 313, 385 307" stroke="white" stroke-width="1"/>
+                        <polygon id="y_arrow" points="310 230, 307 235, 313 235" stroke="white" stroke-width="1"/>
+                        <line id="y_axis" stroke="black" x1="310" x2="310" y1="235" y2="385" stroke-width="3"/>
+                        <line id="x_axis" stroke="black" x1="235" x2="385" y1="310" y2="310" stroke-width="3"/>
+
+                        <line  id="m_y1" stroke="white" stroke-width="2" x1="307" x2="313" y1="250"
+                               y2="250"/>
+                        <line id="m_y2" stroke="white" stroke-width="2" x1="307" x2="313" y1="280"
+                              y2="280"/>
+                        <line id="m_y3" stroke="white" stroke-width="2" x1="307" x2="313" y1="340"
+                              y2="340"/>
+                        <line id="m_y4" stroke="white" stroke-width="2" x1="307" x2="313" y1="370"
+                              y2="370"/>
+                        <line id="m_x1" stroke="white" stroke-width="2" x1="370" x2="370" y1="307" y2="313"/>
+                        <line id="m_x2" stroke="white" stroke-width="2" x1="340" x2="340" y1="307"
+                              y2="313"/>
+                        <line id="m_x3" stroke="white" stroke-width="2" x1="280" x2="280" y1="307"
+                              y2="313"/>
+                        <line id="m_x4" stroke="white" stroke-width="2" x1="250" x2="250" y1="307"
+                              y2="313"/>
+                        <text id="t_a_x" fill="black" x="385" y="325">X</text>
+                        <text id="t_a_y" fill="black" x="295" y="235">Y</text>
+                        <text id="t_y1" fill="black" x="295" y="255">R</text>
+                        <text id="t_y2" fill="black" x="285" y="285">R/2</text>
+                        <text id="t_y3" fill="black" x="280" y="345">-R/2</text>
+                        <text id="t_y4" fill="black" x="290" y="375">-R</text>
+                        <text id="t_x1" fill="black" x="365" y="325">R</text>
+                        <text id="t_x2" fill="black" x="330" y="325">R/2</text>
+                        <text id="t_x3" fill="black" x="270" y="325">-R/2</text>
+                        <text id="t_x4" fill="black" x="245" y="325">-R</text>
+                    </svg>
+                </div>
+
+
+            </ui:define>
+            <h:outputScript library="js" name="graph.js"/>
+
+            <p:panel id="remove_points" visible="false">
+                <h:outputScript>
+                    remove_points();
+                </h:outputScript>
+            </p:panel>
+
+            <p:panel id="ugly_function" visible="false">
+                <h:outputScript>
+                    <ui:repeat value="#{resultsBean.resultList}" var="point">
+                            draw_point("#{point.x}", "#{point.y}", "#{point.r}", "#{point.answer}");
+                        </ui:repeat>
+                </h:outputScript>
+            </p:panel>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>
